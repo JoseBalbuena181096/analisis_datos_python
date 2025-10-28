@@ -226,3 +226,188 @@ Entonces:
 - P(10 | roja) = P(10 ∩ roja) / P(roja) =  (2  / 52 ) / 0.5 =  0.0077
 
 ![](imgs/image_15.png)
+
+## Teorema de bayes
+
+Se apoya de la probabilidad condicionada para calcular la probabilidad de que ocurra un evento A dado que ocurrio otro evento B.
+-  P(B | A) = P(A ∩ B) / P(A)  
+-  P(A|B) = P(B ∩ A) / P(B)  
+- P(B ∩ A) = P(A ∩ B) 
+- P(A ∩ B) = P(B | A) * P(A)  
+
+Entonces:
+- P(A|B) = P(B | A) * P(A) / P(B)
+
+![](imgs/image_16.png)
+
+## Teorema de bayes 
+Clasificador bayesiano Ingenuo - Naive Bayes classifier
+
+En la bandeja de correos tenemos dos tipos de correos, spam y no spam. Yo tengo 10 correos 7 no spam y 3 spam.
+Si me llega un correo que tiene la palabra dinero es o no spam el correo?, si dinero esta en el correo, entonces es spam, las palabras en el correo son lo que mas nos indica si es spam o no.
+
+Para ello vamos a usar el teorema de bayes, y vamos a calcular la probabilidad de que un correo sea spam dado que tiene la palabra dinero.
+
+- P(A|B) = P(B | A) * P(A) / P(B)
+
+Calcular la probabilidad del que el correo sea normal dada la palabra dinero:
+- P(normal|dinero) = P(dinero | normal) * P(normal) / P(dinero)
+
+La  probabilidad de que el correo sea spam dada la palabra dinero:
+- P(spam|dinero) = P(dinero | spam) * P(spam) / P(dinero)
+
+Esto nos permitira comparar cual es la probabilidad de que el correo sea spam o no spam, dado que tiene la palabra dinero.
+- P(normal|dinero) >?< P(spam|dinero)
+
+Como ambas tienen la palabra dinero como divisor, lo podemos ignorar y comparar solo los numeradores.
+
+- P(dinero | normal) * P(normal) / P(dinero) >?< P(dinero | spam) * P(spam) / P(dinero)
+Pasa a:
+- P(dinero | normal) * P(normal)  >?< P(dinero | spam) * P(spam) 
+
+### Correos normales
+Tenemos cuatro palabras que han aparecido en 7 mensajes:
+- amigo - 6 veces
+- enviar - 5 veces
+- actualizar - 3 veces
+- dinero - 1 veces
+
+Total de ocurrencias = 15
+
+- P(amigo|normal) = 6 / 15 = 0.4
+- P(enviar|normal) = 5 / 15 = 0.3333
+- P(actualizar|normal) = 3 / 15 = 0.2
+- P(dinero|normal) = 1 / 15 = 0.0667
+
+### Correos spam
+- amigo - 1 vez
+- enviar - 3 veces
+- actualizar - 0 veces
+- dinero - 5 veces
+
+Total de ocurrencias = 9
+
+- P(amigo|spam) = 1 / 9 = 0.1111
+- P(enviar|spam) = 3 / 9 = 0.3333
+- P(actualizar|spam) = 0 / 9 = 0.0
+- P(dinero|spam) = 5 / 9 = 0.5556
+
+![](imgs/image_18.png)
+
+### Calculo de probabilidad de que el correo se a normal o spam dada una cierta palabra
+P(A|B) = P(B|A) * P(A) / P(B)
+
+Probabilidad a posteriori de que el correo sea normal dado la palabra  amigo P(amigo|normal), verosimilitud es P(amigo|normal) y probabilidad apriori antes de la evidencia
+- P(normal|amigo) = P(amigo|normal) * P(normal) / P(amigo)
+- P(spam|amigo) = P(amigo|spam) * P(spam) / P(amigo)
+
+P(normal | amigo) >?< P(spam|amigo)
+
+Probabilidad normal = P(normal) = 7 / 10 = 0.7, la probabilidad es simplemente proporcion una vez que medimos la probabilidad de que un correo sea normal.
+
+Probabilidad spam = P(spam) = 3 / 10 = 0.3
+
+P(normal | amigo) = P(amigo|normal) * P(normal)  = 0.4 * 0.7 = 0.28
+P(spam | amigo) = P(amigo|spam) * P(spam)  = 0.1111 * 0.3 = 0.0333
+La probabilidad de que el correo sea spam dado la palabra amigo es menor que la probabilidad de que el correo sea normal dado la palabra amigo. Por lo que es correo es normal.
+
+![](imgs/image_19.png)
+
+
+### El correo que nos llego ahora es dinero
+Correo = dinero actualizar dinero   P(A|B) = P(B|A) * P(A) / P(B)
+
+P(normal | dinero, actualizar) = P(actualizar|normal) * P(dinero|normal) * P(normal)  
+= 0.2 * 0.067 * 0.067 * 0.7 = 0.0000628
+
+P(spam | dinero, actualizar) = P(actualizar|spam) * P(dinero|spam) * P(spam)  
+= 0.0 * 0.5556 * 0.3 = 0.0
+
+La palabra actualizar no aparece en los correos spam, por lo que la probabilidad de que el correo sea spam dado la palabra actualizar es 0. Y afecta a nuestro clasificador.
+
+![](imgs/image_20.png)
+
+Para solucionarlo usaremos el suavizado de Laplace, que es una técnica que se usa para evitar que la probabilidad de una palabra que no aparece en el entrenamiento sea 0.
+sumado a todas las ocurrencias de todas las palabras en el entrenamiento, uno se suma a cada ocurrencia de cada palabra.
+
+P(actualizar|spam) = (0 + 1) / (9 + 4) = 0.0077
+
+P(spam|dinero, actualizar) = P(actualizar|spam) * P(dinero|spam) * P(spam)  
+= 0.0077 * 0.5556 * 0.3 = 0.0014
+
+P(spam | dinero, actualizar) > P(normal | dinero, actualizar), por lo que el correo es spam. Para que el clasificador necesitamos que las probabilidades sean independientes, es decir, las palabras no tiene relación entre ellas o el orden de estas.
+
+## Distribución de la probabilidad
+Ensayo de Bernoulli
+
+Un ensayo de Bernoulli es un experimento aleatorio que tiene dos posibles resultados, éxito o fracaso. La probabilidad de éxito es p y la probabilidad de fracaso es 1 - p.
+
+Por ejemplo al tirar un penal existe una probabilidade de meterlo de 0.9 y fallar de 0.1
+Por ejemplo al tirar un dado sería de que caida 6 la probabilidade de exito es de 1/6 y de fracaso de 5/6.
+
+![](imgs/image_21.png)
+
+Tendremos entonces para la distribucion de bernulli f(x) = P(X=x) donde sera 1-p si x = 0, y p si x = 1.
+Tambien se puede ver como f(x) = P(X=x) = p^x (1-p) ^ (1-x)
+X ~ Ber(p)
+
+![](imgs/image_23.png)
+
+## Distribución de la probabilidad binomial
+- X ~ Ber(p) 
+- X ~ B(n, p) una distribución de bernuli tenemos n el número de experimentos y p el exito
+- Ber(p) = B(1, p)
+
+La probabilidad de aprobar un examen si no estudie nada, Un examen con solo dos rrespuestas verdadero o falso.
+la brobabilidad es de de p = 0.5 y el examen tiene 3 preguntas n = 3.
+
+Solo aprobar es lo unico que me interesa. 
+
+Distribución de probabilidad
+Distribución binomial.
+
+Para aprobar:
+bien 0.5, bien 0.5, y fallar 0.5
+
+0.5 X 0.5 x 0.5 = 0.125
+
+bien 0.5, fallar 0.5, y bien 0.5
+
+0.5 X 0.5 x 0.5 = 0.125
+
+fallar 0.5, bien 0.5, y bien 0.5
+
+0.5 X 0.5 x 0.5 = 0.125
+
+La probabilidad de aprobar el examen con dos aciertos. con la probabilidad de acertar de 0.5 es 
+0.125 + 0.125 + 0.125 = 0.375
+![](imgs/image_24.png)
+
+### Función de distribución binomial
+
+pr(x; n, p) = pr(X = x) = (n! / (x! (n-x)!)) * p^x * (1-p)^(n-x)
+
+x = numero de exitos (número de existos deben ser 2 aciertos para aprobar)
+n = numero de experimentos (numero de preguntas)
+p = probabilidad de exito (la probabilidad de acertar es de 0.5 y de no acertar 1 - 0.5 = 0.5)
+
+n! = 3! = 3 * 2 * 1 = 6
+n! = 5! = 5 * 4 * 3 * 2 * 1 = 120
+
+- n! / (x! (n-x)!)= (3! / (2! * (3-2)!)) =  6 / 2 = 3
+
+![](imgs/image_25.png)
+
+- p^x es la probabilidad de exito en el caso de de las preguntas tenemos que tener dos aciertos para aprobar y la probabilidade que estos acierto esten correctos es de 0.5, porlo que la probabilidade de exito es 0.5 * 0.5 = 0.25 o 0.5^2
+![](imgs/image_26.png)
+
+- (1-p)^(n-x) es el ensayo de bernolu cuando n es 1, pero aqui tenrmos el numero de preguntas n es 3 y 2 el numero de exitos x, por lo que la probabilidad de fracaso 1 - 0.5, donde p es la probabilidad de exito
+(1 - 0.5) ^ (3 - 2) = 0.5 ^ 1 = 0.5	
+![](imgs/image_27.png)
+
+porlo que entonces la probabilidad de aprobar con 2 aciertos positivos es
+
+- pr(x=2; n=3, p=0.5) la probabilidad de dos exitos, sabiendo que tenemos 3 preguntas y la probabilidad de exito es 
+- pr(x=2; n=3, p=0.5) = 3*0.5 * 0.5* 0.5 = 0.375
+
+![](imgs/image_28.png)
