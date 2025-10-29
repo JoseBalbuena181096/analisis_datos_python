@@ -411,3 +411,27 @@ porlo que entonces la probabilidad de aprobar con 2 aciertos positivos es
 - pr(x=2; n=3, p=0.5) = 3*0.5 * 0.5* 0.5 = 0.375
 
 ![](imgs/image_28.png)
+
+## Distribución normal (distribución de probabilidad)
+Es para datos continuos. Es decir las variables que pueden tomar cualquier valor en un rango continuo. Donde mu es la media y sigma es la desviación estándar. La distribución normal tiene la forma de campana y es simétrica alrededor de la media.
+![](imgs/image_29.png)
+
+### Ejemplo pesos de recien nacidos
+Se toma el peso de recien nacidos y se obtiene la siguiente distribución de pesos. Con una media de 3.256 kg, y una desviación estándar de 0.627 kg.
+![](imgs/image_30.png)
+
+## El impacto de los parametros mu y sigma en la distribución normal
+- mu es la media y sigma es la desviación estándar.
+- La media es el punto donde la campana está centrada.
+- La desviación estándar es una medida de la dispersión de los datos alrededor de la media.
+- Un valor alto de sigma significa que los datos están más dispersos y un valor bajo de sigma significa que los datos están más concentrados.
+
+Las siguientes distribuciones muestrna las alturas de personas en diversas islas, cada distribución es una isla.
+- Una sigma muy pequeña:
+![](imgs/image_31.png)
+
+- Se cambia mu a 13 y despues mu a 20, donde podemos ver que cuando cambiamos mu la distribución se mueve en el eje x: 
+![](imgs/image_32.png)
+
+- En cambio si se cambia sigma a 2, y luego a 3, podemos ver que cuando cambiamos sigma la distribución se vuelve más dispersa o distribuidos, y la campana se va aplanando, cada vez mas con una sigma mas grande.
+![](imgs/image_33.png)
