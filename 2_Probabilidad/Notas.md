@@ -435,3 +435,71 @@ Las siguientes distribuciones muestrna las alturas de personas en diversas islas
 
 - En cambio si se cambia sigma a 2, y luego a 3, podemos ver que cuando cambiamos sigma la distribución se vuelve más dispersa o distribuidos, y la campana se va aplanando, cada vez mas con una sigma mas grande.
 ![](imgs/image_33.png)
+
+## Distribución de probabilidad - Función de masa de probabilidad
+
+- La función f(x) = P(X=x) = (p^x) * (1-p)^(1-x) de probabilidad de binomial o de ensayo de bernoulli. Cuando trabajamos con esta función solo tenemos dos posibles valores, éxito 1 o fracaso 0.
+![](imgs/image_34.png)
+
+Si esta misma distribución la realizamos para una distribución binomial, no es mas que un ensayo de Bernoulli n veces.
+f(x) = P(x; n, p) = (n! / (x! (n-x)!)) * p^x * (1-p)^(n-x)   
+
+![](imgs/image_35.png)
+En la grafica tenermos varios intentetos tener varios exitos o fracaso, la probabilidad de 1 exito es de 0.14, la probabilidad de tener 2 exitos es de 0.24, la probabilidad de tener 3 exitos es de 0.29, de 4 exitos es 0.22, la probabilidad de tener 5 exitos es de 0.14, de 6 exitos es 0.07 y de 8,9 y 10 es de 0. Todo esto es con datos discretos.
+
+ 
+### Juego de la botella
+Cuatro personas juega el juego de la botella, al inicio solo si la botella apunta aun punto especifico situdado delante de la persona puede darle el beso, pero observa que es muy dificil que la botella apunte exactamente al ese punto, porlo que opta por cambiar las reglas de juego y la persona puede bberar a la otra persona si apunta un rango de puntos que es todo lo que abarca la persona de frente, con esto se aumenta la frecuencia de besos. 
+
+![](imgs/image_36.png)
+
+A nivel matematico se llama función de densidad de probabilidad. La probabilidad de un valor especifico, es la altura de la campana en ese punto, y en un rango por ejemplo entre 8 y 10, esto se conoce como la densidad de probabilidad.
+![](imgs/image_37.png)
+
+Toda el area que esta bajo la campana debe ser igual a uno.
+
+![](imgs/image_38.png)
+
+La diferencia entre la funcion de masa de probabilidad es que en la de masa de probabilidad son valores discretos y en la de densidad de probabilidad son valores continuos. En eje y cuando de ve la función de probabilidad es eso una densidad de probabilidad, la probabilidad es hasta que se calcula el area entre el rango de valores y las alturas de la campana es ese rango.
+
+Para calcular la densidad de probabilidad se ocupa la función:
+![](imgs/image_40.png)
+
+La función de densidad de probbabilidad podemos tener valores mayores a uno, en lugar de la de masa cuyo maximo altura es de 1.
+
+En ejemplos de densidad de pobabilidad, en el juego de la botella tenemos que son 360 grados donde puede caer la botella y todos son iguales de equiprobables, y el area de probabilidad siempre debe ser 1, por que podemos calcular la densidad de probabilida o la altura la cual seria altura = 1 / base = 1/360, 1/360 es la densidad de probabilidad para todos los puntos.
+
+![](imgs/image_41.png)
+Otro ejemplo es que llegue un paquete a la mitad del dia, como el area es la probabilidad, para obtener la densidad de probabilidad seria 1 / 0.5 = 2, la densidad de probabilidad o altura del rectangulo es 2, comprobando que en la densidad de probabilidad, la altura puede ser mayor a 1.
+
+![](imgs/image_42.png)
+
+## Función de distribución acumulada FDA/CDF
+
+P(x <= a)
+P(x <= 2000 gr)
+
+![](imgs/image_43.png)
+
+El area azul es la probabilidad y la altura en ese rango es la densidad de probbilida, pero para calcular esa pequeña area no hay como tal un base por altura por que no es un rectangulo, para calcularlo se usa la función de distribución acumulada. Esa función de distribución acumulada me dara el valor menor o igual a 2000.
+
+![](imgs/image_44.png)
+
+En el caso que la probabilidad sea mayor que b, P(x > b) y P(x > 4000), como lo que quiero es la parte sueperior y no lo del area verde seria 1 - area_verde
+![](imgs/image_45.png) 
+
+### Entonces en un rango
+P(a< x <= b)
+P(2900 < x <= 3500)
+
+![](imgs/image_46.png)
+Para calcular el area con la función de distribucion acumulada seria P(3500) - P(2900)
+
+ ![](imgs/image_47.png)
+
+ Tenemos 3 casos posibles para la funcion de distribucion acumulada:
+- P(x <= a)
+- P(a < x <= b)
+- P(x > b)
+
+![](imgs/image_48.png)
