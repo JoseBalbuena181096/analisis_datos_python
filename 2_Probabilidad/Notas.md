@@ -503,3 +503,72 @@ Para calcular el area con la función de distribucion acumulada seria P(3500) - 
 - P(x > b)
 
 ![](imgs/image_48.png)
+
+## Teorema central del límite
+Tomamos la siguiente distribución binomial
+X ~ B(100, 0.5)
+n = 5
+
+![](imgs/image_49.png)
+
+n = 30
+![](imgs/image_50.png)
+
+n = 500
+![](imgs/image_51.png)
+
+n = 95000
+![](imgs/image_52.png)
+
+El teorema central del limite nos dice que si una muestra es lo suficientemente grande, sea cual sea la distribución (ya sea binomial) seguira aproximandose a una distribución normal. Para cualquier variable aleatoria si extraemos un tamaño los suficientemente grande, y calculamos los promedios muestrales, dichos promedios seguiran una distribución normal.
+
+## Los 10 conceptos de probabilidad vistos:
+- Regla de laplace evento/espacio_muestral
+- Eventos independientes y arbol de probabilidades y eventos consecutivos probabilidades P(A y B), P(A o B).
+- El teorema de bayes  P(A|B) = P(B|A) x P(A) / P(B)
+
+### Diferencia entre P(A|B) y P(B|A)
+Estos conceptos pertenecen al campo de la probabilidad condicionada y son fundamentalmente diferentes, aunque están relacionados por el Teorema de Bayes. 
+- P(A|B) es la "probabilidad de A dado B": Mide la probabilidad de que ocurra el evento A, sabiendo que el evento B ya ha ocurrido. El universo de posibles resultados se restringe al evento B.
+- P(B|A) es la "probabilidad de B dado A": Mide la probabilidad de que ocurra el evento B, sabiendo que el evento A ya ha ocurrido. El universo de posibles resultados se restringe al evento A. 
+- Ejemplo sencillo para ilustrar la diferencia:
+- Imagina que tienes una baraja de cartas estándar.
+- Evento A: Sacar un As.
+- Evento B: Sacar una carta de Corazones.
+- P(A|B): Probabilidad de sacar un As, dado que la carta es de Corazones.
+- Sabemos que hay 13 corazones en total, y solo uno de ellos es un As.
+- P(A|B) = 1/13.
+- P(B|A): Probabilidad de sacar una carta de Corazones, dado que la carta es un As.
+- Evento B: Sacar una carta de Corazones.
+- P(A|B): Probabilidad de sacar un As, dado que la carta es de Corazones.
+Sabemos que hay 13 corazones en total, y solo uno de ellos es un As.
+- P(A|B) = 1/13.
+- P(B|A): Probabilidad de sacar una carta de Corazones, dado que la carta es un As.
+Sabemos que hay 4 Ases en total, y solo uno de ellos es de Corazones.
+- P(B|A) = 1/4. 
+Como puedes ver, los valores y lo que representan son distintos. El Teorema de Bayes proporciona una forma de calcular P(B|A) si conoces P(A|B) y las probabilidades individuales de A y B. 
+
+
+- El ensayo de bernolli, solo tiene dos posibilidades exito o fracaso. f(x) = P(X=x) = p^x * (1-p)^(1-x)
+- La distribución binomial, en lugar de realizar un unico ensayo de bernolli, realizamos n ensayos de bernolli, f(x) = P(x; n,p) = (n! / (x! (n-x)!)) * p^x * (1-p)^(n-x)
+
+![](imgs/image_53.png)
+
+### Representaciones gráficas de probabilidad
+
+### Funciones de masa de probabilidad
+- Bernoulli
+- Binomial
+
+### Funciones de densidad de probabilidad
+- Normal
+La densidad de probabilidad de una variable normal es una función continua que describe la probabilidad de que la variable tome un valor particular. La forma de esta función es una campana centrada en el valor medio (media) y con una dispersión determinada por la desviación estándar. El area bajo la curva de la densidad de probabilidad siempre es igual a 1. La densidad de probbabilidad es la altura en el eje y.
+La distribución de probabilidad acumulada (FDA/CDF) es la función que nos dice la probabilidad de que la variable aleatoria sea menor o igual a un valor particular. Es una función continua que va de 0 a 1.
+
+![](imgs/image_54.png)
+
+
+### El teorema central del límite
+El teorema central del límite nos dice que si una muestra es lo suficientemente grande, sea cual sea la distribución (ya sea binomial) seguira aproximandose a una distribución normal. Para cualquier variable aleatoria si extraemos un tamaño los suficientemente grande, y calculamos los promedios muestrales, dichos promedios seguiran una distribución normal. El siguiente ejemplo son distribuciones de bernolli, con ejemplos binomiales de 100 preguntas de verdad o falso, con n cantidades de examenes.
+
+![](imgs/image_55.png)
